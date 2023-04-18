@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Agency </title>
+    <style>
+#move{
+    animation: mymove 5s infinite;
+ }
+ @keyframes mymove {
+    10%{transform: rotate3d(1,1,1,200deg);}
+    20% {transform: translateX(-100px);}
+    80%{transform: translateX(90px);}
+ }
+
+ #moveimg{
+    animation: imgmove 5s infinite;
+ }
+ @keyframes imgmove {
+    100% {transform: rotate(360deg);}
+ }
+ .section-heading {
+    font-family: "Dancing Script", cursive;
+    text-align: center;
+    font-size: 64px;
+    color: #10996d;
+    margin: 0 0 70px;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .profile {
+    position: relative;
+    transition: all 0.3s;
+  }
+  
+  .profile:hover {
+    transform: translateX(25px);
+  }
+  
+  .profile img {
+    max-width: 240px;
+    border-radius: 20px;
+    border: 5px solid #f7f7f7;
+    filter: drop-shadow(-20px 0 10px rgba(0, 0, 0, 0.1));
+    cursor: pointer;
+  }
+
+  .profile:not(:first-child) img {
+    margin-left: -20px;
+  }
+  
+  .profile .name {
+    position: absolute;
+    background-color: #10996d;
+    color: #fff;
+    font-family: "Bebas Neue", cursive;
+    padding: 15px 30px;
+    border-radius: 100px;
+    bottom: -50px; left: 50%;
+    white-space: nowrap;
+    transform: translate(50%, 50px);
+    letter-spacing: 1px;
+    font-size: 20px;
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  
+  .profile .name::before {
+    content: "";
+    position: absolute;
+    width: 15px; height: 15px;
+    background-color: #10996d;
+    top: 0; left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .profile img:hover + .name {
+    opacity: 1;
+    transform: translateX(-50%);
+    box-shadow: 0 10px 20px rgba(86, 86, 198, 0.3);
+  }
+  #payment-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+#pay {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+#pays {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.payment-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border: 1px solid #535cf1;
+    border-radius: 20px;
+}
+
+.payment-modal-content h2 {
+  text-align: center;
+  margin: 20px 0 20px 0;
+
+}
+
+.payment-modal-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  margin: 20px;
+  padding: 10px;
+}
+
+.payment-modal-content label {
+    align-self: flex-start;
+    margin: 20px 0px 0px 5px;
+}
+
+.payment-modal-content input {
+  padding: 5px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 5px;
+}
+
+.payment-modal-content button[type="submit"] {
+  width: 100%;
+  margin-top: 30px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #2ecc71;
+  outline: medium none;
+  color: #1d1d1d;
+  background-color: white;
+}
+
+.payment-modal-content button[type="submit"]:hover {
+    background-image: linear-gradient(to right, #535cf1, #a147e4);
+    color: #ffffff;
+    border: 1px solid #2ecc71;
+}
+
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- to put icon on web tab -->
+    <link rel="shortcut icon" href="Assets/images/logo.png" >
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- uses for icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+
+     
+ <!-- ===================== nav ============================ -->
+ 
+ 
+    <div class="nav">
+
+        <!-- logo -->
+        <a class="logo" href="#">
+            <img src="Assets/images/logo.png">
+        </a>
+
+
+        <!-- 3 line -->    
+        <div class="navbar-toggler" type="button" id="bar">
+            <span class="toggler-icon"></span>
+            <span class="toggler-icon"></span>
+            <span class="toggler-icon"></span>
+        </div>
+
+
+        <!-- menu bar list of buttons -->
+        <div class="menu-bar">
+            <ul class="menu-items">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#service">Service</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#team">Team</a></li>
+            </ul>
+        </div>
+
+    
+
+ <!-- social media icons-->
+        <div class="navbar-social">
+            <span>FOLLOW US</span>
+            <ul>
+                <li><a href="#"><i class="fa-brands fa-instagram"></i></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- ===================== Home ============================ -->
+ 
+ <!-- setup image -->
+    <div class="back" id="home">
+        <div class="overlay"></div>
+           <div class="hero-shape">
+            <img src="Assets/images/header-shape.svg">
+           </div> 
+    </div>
+    
+
+
+
+<div class="body">
+
+
+<div class="wrapper">
+    <div class="p"></div>
+
+    
+    
+    <div class="static-txt">We're</div>
+    <ul class="dynamic-txts">
+        
+      <li><span>Marketing Agency</span></li>
+      <li><span>Media Agency</span></li>
+      <li><span>Advertising Agency</span></li>
+      <li><span>Freelancer</span></li>
+    </ul>
+  
+    <div class="v"></div>
+  </div>
+
+</div>
+
+
+
+
+
+
+<!-- content of image -->
+    <div class="hero-text ">
+        <h3>We are a strategic Marketing, Media and Ideas Agency</h3>
+        <h6>A simple, customizable, and a beautiful Agency business focused on landing page to make your project closer to launch!</h6>
+        <ul class="header-btn">
+            <li><a class="addthis_inline_share_toolbox main-btn btn-one" href="login_signup.html">GET IN TOUCH</a></li>
+            <li><a class="main-btn btn-two"  href="#">WATCH THE VIDEO <i class="fa fa-play"></i><div id="video"></div></a></li>
+        </ul>
+    </div>
+    
+
+<!------------------------------ section  ----------------------------------------->
+<!-- heading part -->
+<section id="wrapper">
+    <section id="service" class="service offset">
+        <h3>Crafted For</h3>
+        <h6>stop wasting time and money designing and managinga website that doesn't get result. <br>Happiness guaranteed!</h6>
+    
+
+
+<div class="service-content">
+    <div class="box">
+        <div class="box-one">
+
+
+
+            <!-- first -->
+            <div class="services">
+                <div class="service-icon">
+                    <i class="fa fa-bar-chart"></i>
+                </div>
+                
+                <div class="service-content">
+                    
+                    <h4 class="services-title">Agency Business</h4>
+                    <p class="text">short description for the ones</br>who look for something new.</p>
+                
+                </div>
+            </div>
+            <br><br>
+            <!-- 2nd -->
+            <div class="services">
+                <div class="service-icon">
+                    <i class="fa fa-coffee"></i>
+                </div>
+                <div class="service-content">
+                    
+                    <h4 class="services-title">Agency Business</h4>
+                    <p class="text">short description for the ones</br>who look for something new.</p>
+                
+                </div>
+            </div>
+
+
+
+        </div>
+<br><br>
+        <!-- 2nd box -->
+        <div class="box-one">
+
+
+
+            <!-- first -->
+            <div class="services">
+                <div class="service-icon">
+                    <i class="fa fa-bell"></i>
+                </div>
+                <div class="service-content">
+                    
+                    <h4 class="services-title">Agency Business</h4>
+                    <p class="text">short description for the ones</br>who look for something new.</p>
+                
+                </div>
+            </div>
+            <br><br>
+            <!-- 2nd -->
+            <div class="services">
+                <div class="service-icon">
+                    <i class="fa fa-area-chart"></i>
+                </div>
+                <div class="service-content">
+                    
+                    <h4 class="services-title">Agency Business</h4>
+                    <p class="text">short description for the ones</br>who look for something new.</p>
+                
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    
+    <div class="service-img">
+        <img src="assets/images/1.png" style="width: 1%;">
+    </div>
+</div>
+</section>
+
+<!-- =============================== pricing ================================ -->
+
+<!-- creat section for pricing -->
+<section id="pricing" class="pricing offset">
+    
+    <h3>Our Pricing</h3>
+    <h6>Stop wasting your time and money on designing & managing websites that doesn't get you any results. <br>With Agency, Your happiness is guaranteed!</h6>
+
+    
+    <div class="table">
+
+         <!-- first Card -->
+
+
+        <div class="basic">
+            <div class="b-head">
+                <h3>BASIC</h3>
+            </div>
+            <div class="price">
+                <span class="sing">Rs</span>
+                <span class="currency">99</span>
+                <span class="cent">.99/</span>
+                <span class="month">MON</span>
+            </div>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Carefully crafted components
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Amazing page examples
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Super friendly support team
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Amazing support
+                </li>
+            </ul>
+            <ul class="header-btn" id="buys">
+                <a class="main-btn btn-two" href="#">See More</a>
+            </ul>
+        </div>
+
+
+        <!-- 2nd Card -->
+        <div class="basic standard">
+            <div class="b-head">
+                <h3>STANDARD</h3>
+            </div>
+            <div class="price">
+                <span class="sing">Rs</span>
+                <span class="currency">199</span>
+                <span class="cent">.99/</span>
+                <span class="month">MON</span>
+            </div>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Carefully crafted components
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Amazing page examples
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Super friendly support team
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Awesome support
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Amazing page examples
+                </li>
+            </ul>
+            <ul class="header-btn " id="buy">
+                <a class="main-btn btn-two" href="#">See More</a>
+            </ul>
+        </div>
+
+
+        <!-- 3rd Card -->
+        <div class="basic">
+            <div class="b-head">
+                <h3>UNLIMITED</h3>
+            </div>
+            <div class="price">
+                <span class="sing">Rs</span>
+                <span class="currency">299</span>
+                <span class="cent">.99/</span>
+                <span class="month">MON</span>
+            </div>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Carefully crafted components
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Amazing page examples
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Super friendly support team
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Amazing support
+                </li>
+            </ul>
+            <ul class="header-btn " id="buy-now-button">
+                <a class="main-btn btn-two" href="#">See More</a>
+            </ul>
+        </div>
+    </div>
+    <!-- ========Payment Modal 1========= -->
+   
+
+    <div id="payment-modal">
+      <div class="payment-modal-content">
+        <h2>Payment Information</h2>
+        <form>
+          <label for="name">Name on Card:</label>
+          <input type="text" id="name" name="name" required>
+          <label for="card-number">Card Number:</label>
+          <input type="text" id="card-number" name="card-number" required>
+          <label for="expiry-date">Expiry Date:</label>
+          <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+          <label for="cvv">CVV:</label>
+          <input type="text" id="cvv" name="cvv" required>
+          <button type="submit">Submit Payment</button>
+        </form>
+      </div>
+    </div>
+    <!--Modal 2 -->
+    <div id="pay">
+        <div class="payment-modal-content">
+          <h2>Payment Information</h2>
+          <form>
+            <label for="name">Name on Card:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-number" name="card-number" required>
+            <label for="expiry-date">Expiry Date:</label>
+            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required>
+            <button type="submit">Submit Payment</button>
+          </form>
+        </div>
+      </div>
+<!--Modal 3 -->
+<div id="pays">
+    <div class="payment-modal-content">
+      <h2>Payment Information</h2>
+      <form>
+        <label for="name">Name on Card:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number" name="card-number" required>
+        <label for="expiry-date">Expiry Date:</label>
+        <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" required>
+        <button type="submit">Submit Payment</button>
+      </form>
+    </div>
+  </div>
+
+    
+    <section class="callToAct">
+
+        <div class="parallax">
+            <div class="call-content">
+                <h3 class="call-title">Curious to learn More? Stay Tuned</h3>
+                <p class="text">Let us know whenever you wish to update anything or feel like something can be optimised.</p>
+           
+                <div class="call-news">
+                    <i class="fa fa-envelope"></i>
+                    <input type="text" placeholder="john@email.com" name="">
+                    <button type="submit" onclick="gmail()" value="Gmail open">SUBSCRIBE</button>
+                </div>
+            </div>
+        </div>
+        
+        
+        </section>
+        
+
+
+</section>
+
+    <!-------------------------------------------- contact form ------------------------------------------------------------------------------>
+    <section class="contact offset" id="contact">
+        <h3>Get In touch</h3>
+       
+
+        <div class="form">
+            <div class="first-row">
+             <input type="text" placeholder="Name"name=""> 
+             <input type="text" placeholder="Email"name="">  
+            </div>
+            <div class="first-row">
+             <input type="text" placeholder="Subject"name="">
+             <input type="text" placeholder="Phone"name="">
+            </div>
+            <textarea placeholder="Massage" rows="5"></textarea>
+    
+            <ul class="header-btn">
+                <a class="main-btn btn-two" hrf="#">Submit</a>
+            </ul>
+        </div>
+    
+    </section>
+
+<!-- -----------------------------------------------------------team-------------------------------------------------------------------- -->
+    <div class="team offset" id="team">
+    
+        <h3>Our Team</h3>
+        <h6>To know more, click here</h6>
+        
+        
+        <div class="img">
+          <a href="https://jasleen200000001.github.io/creative-cv/"><div class="ca"><img class="teamimg" src="Assets/images/Jasleen.jpg" alt="Archana Yadav">
+            <p class="b">Jasleen Kaur</p>
+          </div></a>
+
+
+            <a href="https://raneearchana.github.io/creative-cv/"><div class="ca"> <img class="teamimg" src="Assets/images/arch.jpg" alt="Archana Yadav">
+              <p class="a">Archana Yadav</p></div></a>
+
+        </div>
+        
+        </div>
+
+
+
+
+
+
+
+
+
+</section>
+<!-- -----------------------------------------------------------footer-------------------------------------------------------------------- -->
+<footer>
+    <div class="row-one">
+        <!-- use for logo -->
+        <a class="logo"hrf="#">
+            <img src="assets/images/logo.png">
+        </a>
+    
+        <!-- this is for icons  -->
+        <ul>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+        </ul>
+
+        
+
+    </div>
+ <div class="second-row">
+        <div class="first-row">
+          <h6 class="footer-title">Company</h6>
+          <ul>
+            <li><a hrf="#">About</a></li>  
+            <li><a hrf="#">contact</a></li> 
+            <li><a hrf="#">Center</a></li>
+            </ul>
+        </div>
+       
+        <div class="first-row">
+            <h6 class="footer-title">Product & Service</h6>
+            <ul>
+            <li><a hrf="#">Products</a></li>  
+            <li><a hrf="#">Business</a></li> 
+            <li><a hrf="#">Developer</a></li>
+        </ul>
+        </div>
+        <div class="first-row">
+            <h6 class="footer-title">Help & Suuport</h6>
+            <ul>
+            <li><a hrf="#">Support Center</a></li>  
+            <li><a hrf="#">FAQ</a></li> 
+            <li><a hrf="#">Terms & Conditions</a></li>
+        </ul>
+    </div>
+
+
+
+
+    <div class="first-row">
+        <h6 class="footer-title">Subscribe Newsletter</h6>
+        <div class="newsletter">
+            <input type="text" name="" placeholder="Your Email">
+            <button type="submit"><i class="fa fa-angle-double-right"></i></button>
+        </div>
+        <p class="text">Subscribe our weekly newsletter to stay upto date.</p>
+    </div>
+
+
+ </div>
+
+
+
+</footer>
+
+
+
+
+
+<!-- ------------------------------------------------------------------------------ribon----------------------------------------------------------------------------- -->
+<div class="copyright" >
+    <p>Template Crafted by <a rel="followjasleen" href="#">Jasleen Kaur </a>and <a rel="followArchana" href="https://raneearchana.github.io/creative-cv/"> Archana Yadav</a>
+        students of ADIT (IBM)</p>
+
+        
+
+</div>
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175148287-1"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" ></script>
+    <script src="script.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" ></script>
+    <script src="script.js"></script>
+<script>
+    const buyNowButton = document.getElementById('buy-now-button');
+const paymentModal = document.getElementById('payment-modal');
+
+buyNowButton.addEventListener('click', () => {
+  paymentModal.style.display = 'block';
+});
+
+window.addEventListener('click', (event) => {
+  if (event.target === paymentModal) {
+    paymentModal.style.display = 'none';
+  }
+});
+
+const buy = document.getElementById('buy');
+const pay = document.getElementById('pay');
+
+buy.addEventListener('click', () => {
+  pay.style.display = 'block';
+});
+
+window.addEventListener('click', (event) => {
+  if (event.target === pay) {
+    pay.style.display = 'none';
+  }
+});
+
+const buys = document.getElementById('buys');
+const pays = document.getElementById('pays');
+
+buys.addEventListener('click', () => {
+  pays.style.display = 'block';
+});
+
+window.addEventListener('click', (event) => {
+  if (event.target === pays) {
+    pays.style.display = 'none';
+  }
+});
+//prevent refresh of page
+document.getElementById("buys").addEventListener("click", function(event){
+        event.preventDefault();
+      });
+      document.getElementById("buy").addEventListener("click", function(event){
+        event.preventDefault();
+      });
+      document.getElementById("buy-now-button").addEventListener("click", function(event){
+        event.preventDefault();
+      });
+
+      
+	function gmail(){
+		window.open('http://gmail.com','_blank');
+	}
+
+
+    gtag('config', 'UA-175148287-1');
+
+    $(document).ready(function(){
+        $(".btn-two").click(function(){
+            $("#video").toggle().append('<iframe width="100%" height="500" src="https://www.youtube.com/watch?v=Df74BzAtnu4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+        });
+    });
+
+
+
+</script>
+
+</script>
+
+</body>
+</html>
